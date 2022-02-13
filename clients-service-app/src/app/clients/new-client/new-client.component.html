@@ -1,0 +1,105 @@
+<div class="new-client-page">
+    <form [formGroup]="client" (ngSubmit)="onAddClient()">
+        <div class="form-groups">
+            <div class="form-group">
+                <label for="name">*სახელი: </label>
+                <input type="text" id="name" formControlName="name">
+                <span *ngIf="!client.get('name')?.valid && client.get('name')?.touched" class="help-message">
+                    სახელი უნდა შედგებოდეს 2-50 სიმბოლოსგან, უნდა შეიცავდეს მხოლოდ ქართულ ან მხოლოდ ლათინურ ასოებს
+                </span>
+            </div>
+            <div class="form-group">
+                <label for="surname">*გვარი:</label>
+                <input type="text" id="surname" formControlName="surname">
+                <span *ngIf="!client.get('surname')?.valid && client.get('surname')?.touched" class="help-message">
+                    გვარი უნდა შედგებოდეს 2-50 სიმბოლოსგან, უნდა შეიცავდეს მხოლოდ ქართულ ან მხოლოდ ლათინურ ასოებს
+                </span>
+            </div>
+        </div>
+
+        <div class="form-groups">
+            <div class="form-group">
+                <label for="person_id">*პირადი ნომერი: </label>
+                <input type="text" id="person_id" formControlName="person_id">
+                <span *ngIf="!client.get('person_id')?.valid && client.get('person_id')?.touched" class="help-message">
+                    პირადი ნომერი უნდა იყოს 11 ნიშნა ციფრი
+                </span>
+            </div>
+            <div class="form-group">
+                <label for="mobile">*მობილურის ნომერი:</label>
+                <input type="number" id="mobile" formControlName="mobile">
+                <span *ngIf="!client.get('mobile')?.valid && client.get('mobile')?.touched" class="help-message">
+                    მობილურის ნომერი უნდა იყოს 9 ნიშნა ციფრი, აუცილებელია იწყებოდეს 5-ით
+                </span>
+            </div>
+        </div>
+
+        <div class="leg-address" formGroupName="legal_address">
+            <h4>*იურიდული მისამართი:</h4>
+            <div class="address-groups">
+                <div class="address-group">
+                    <label for="legal_country">ქვეყანა:</label>
+                    <input type="text" id="legal_country" formControlName="legal_country">
+                    <span *ngIf="!client.get('legal_address.legal_country')?.valid && client.get('legal_address.legal_country')?.touched" class="help-message">
+                        ეს ველი არ შეიძლება იყოს ცარიელი
+                    </span>
+                </div>
+                <div class="address-group">
+                    <label for="legal_city">ქალაქი:</label>
+                    <input type="text" id="legal_city" formControlName="legal_city">
+                    <span *ngIf="!client.get('legal_address.legal_city')?.valid && client.get('legal_address.legal_city')?.touched" class="help-message">
+                        ეს ველი არ შეიძლება იყოს ცარიელი
+                    </span>
+                </div>
+                <div class="address-group">
+                    <label for="legal_address">მისამართი:</label>
+                    <input type="text" id="legal_address" formControlName="legal_address">
+                    <span *ngIf="!client.get('legal_address.legal_address')?.valid && client.get('legal_address.legal_address')?.touched" class="help-message">
+                        ეს ველი არ შეიძლება იყოს ცარიელი
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="act-address" formGroupName="actual_address">
+            <h4>*ფაქტიური მისამართი:</h4>
+            <div class="address-groups">
+                <div class="address-group">
+                    <label for="actual_country">ქვეყანა:</label>
+                    <input type="text" id="actual_country" formControlName="actual_country">
+                    <span *ngIf="!client.get('actual_address.actual_country')?.valid && client.get('actual_address.actual_country')?.touched" class="help-message">
+                        ეს ველი არ შეიძლება იყოს ცარიელი
+                    </span>
+                </div>
+                <div class="address-group">
+                    <label for="actual_city">ქალაქი:</label>
+                    <input type="text" id="actual_city" formControlName="actual_city">
+                    <span *ngIf="!client.get('actual_address.actual_city')?.valid && client.get('actual_address.actual_city')?.touched" class="help-message">
+                        ეს ველი არ შეიძლება იყოს ცარიელი
+                    </span>
+                </div>
+                <div class="address-group">
+                    <label for="actual_address">მისამართი:</label>
+                    <input type="text" id="actual_address" formControlName="actual_address">
+                    <span *ngIf="!client.get('actual_address.actual_address')?.valid && client.get('actual_address.actual_address')?.touched" class="help-message">
+                        ეს ველი არ შეიძლება იყოს ცარიელი
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-groups img_gender">
+            <div class="gender-group">
+                <p>*სქესი:</p>
+                <input type="radio" formControlName="gender" [value]="'female'" name="gender">
+                <label for="female">ქალი</label>
+                <input type="radio" formControlName="gender" [value]="'male'" name="gender">
+                <label for="male">კაცი</label>
+            </div>
+        </div>
+        <button class="btn" type="submit">კლიენტის დამატება</button>
+        <span *ngIf="!client.valid && client.touched && clicked" class="help-message">
+            მონაცემები არ არის სწორად შევსებული
+        </span>
+    </form>
+</div>

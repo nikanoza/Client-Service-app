@@ -1,0 +1,84 @@
+.new-client-page{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form{
+    width: 50%;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    font-size: 1.2em;
+    gap: 20px;
+}
+
+.form-groups{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.img_gender{
+    justify-content: flex-start;
+}
+
+.form-group{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.address-groups{
+    display: flex;
+}
+
+.address-group{
+    width: calc(100%/3);
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group input, .address-group input{
+    margin-top: 10px;
+    width: 80%;
+    outline: none;
+    height: 2rem;
+    padding: 3px;
+}
+
+.gender-group{
+    display: flex;
+}
+
+
+.gender select{
+    width: 20%;
+    outline: none;
+    height: 2rem;
+}
+
+input.ng-invalid.ng-touched{
+    border: 1px solid red;
+}
+
+input[type='radio']{
+    margin-left: 10px;
+}
+
+.btn{
+    background: green;
+    color: #fff;
+    padding: 10px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    font-size: 1.1em;
+}
+
+.help-message{
+    font-size: 0.7em;
+    color: red;
+}
