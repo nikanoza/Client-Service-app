@@ -82,3 +82,7 @@ input[type='radio']{
     font-size: 0.7em;
     color: red;
 }
+
+.done{
+    font-size: 1em;
+}

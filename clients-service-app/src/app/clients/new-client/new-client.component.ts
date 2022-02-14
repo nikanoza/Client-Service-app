@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ImageSnippet } from 'src/app/models/image.model';
+import { Client } from 'src/app/models/client.model';
+import { ClientService } from 'src/app/services/client.service';
 
 @Component({
   selector: 'app-new-client',
@@ -9,13 +10,16 @@ import { ImageSnippet } from 'src/app/models/image.model';
 })
 export class NewClientComponent implements OnInit {
 
+  clients: Client[] = [];
   client!: FormGroup;
-  selectedFile!: ImageSnippet;
   clicked = false;
+  postClient = false;
 
-  constructor() { }
+  constructor(private clientService: ClientService) { }
 
   ngOnInit(): void {
+    this.onFetchClientsdata();
+
     this.client = new FormGroup({
       'name': new FormControl(null, [Validators.required, this.checkNameValidity.bind(this)]),
       'surname': new FormControl(null, [Validators.required, this.checkNameValidity.bind(this)]),
@@ -37,11 +41,29 @@ export class NewClientComponent implements OnInit {
 
   onAddClient(){
     this.clicked = true;
-    console.log(this.client.get('name')?.valid)
+    this.postClient = false;
+    if(this.client.valid){
+      const newClient = {
+        ...this.client.value,
+        id: this.clients.length + 1
+      }
+      this.clientService.addClient(newClient).subscribe(
+        request => {
+          this.postClient = true;
+          setTimeout( ()=>{
+            this.postClient = false;
+          }, 3000);
+        }
+      )
+      
+    }
   }
 
-  onUploadImage(event: any){
-    console.log(event)
+  onFetchClientsdata(){
+    this.clientService.fetchClientsData()
+    .subscribe(
+      data => this.clients = data
+    );
   }
 
   checkNameValidity(control: FormControl): {[k: string]: boolean} | null {

@@ -29,7 +29,7 @@
                 <label for="mobile">*მობილურის ნომერი:</label>
                 <input type="number" id="mobile" formControlName="mobile">
                 <span *ngIf="!client.get('mobile')?.valid && client.get('mobile')?.touched" class="help-message">
-                    მობილურის ნომერი უნდა იყოს 9 ნიშნა ციფრი, აუცილებელია იწყებოდეს 5-ით
+                    მობილურის ნომერი უნდა იყოს 9 ნიშნა რიცხვი, აუცილებელია იწყებოდეს 5-ით
                 </span>
             </div>
         </div>
@@ -101,5 +101,6 @@
         <span *ngIf="!client.valid && client.touched && clicked" class="help-message">
             მონაცემები არ არის სწორად შევსებული
         </span>
+        <span class="help-message done" *ngIf="postClient">ოპერაცია წარმატებით დასრულდა</span>
     </form>
 </div>

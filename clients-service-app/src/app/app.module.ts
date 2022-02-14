@@ -12,6 +12,7 @@ import { ClientsComponent } from './clients/clients.component';
 import { HelpComponent } from './help/help.component';
 import { NewClientComponent } from './clients/new-client/new-client.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +27,7 @@ import { NewClientComponent } from './clients/new-client/new-client.component';
     ReactiveFormsModule,
     AppRoutingModule,
     FontAwesomeModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

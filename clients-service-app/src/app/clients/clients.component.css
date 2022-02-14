@@ -2,7 +2,9 @@
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .clients-header{
@@ -39,4 +41,29 @@ fa-icon{
     color: #fff;
     margin-left: 20px;
     justify-self: center;
+}
+
+.client-list{
+    margin-top: 20px;
+}
+
+.list-header{
+    display: flex;
+}
+
+.list-header>div{
+    background: #333333;
+    color: rgb(242,231,71);
+}
+
+.list-box{
+    padding: 5px 10px;
+    margin: 5px;
+    width: 200px;
+    text-align: center;
+    border: 1px solid #000;
+}
+
+.client{
+    display: flex;
 }

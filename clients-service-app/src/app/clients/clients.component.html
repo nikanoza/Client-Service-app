@@ -11,4 +11,48 @@
             <input type="text">
         </div>
     </div>
+    <div class="client-list">
+        <div class="list-header">
+            <div class="list-box edit">
+                რედაქტირება
+            </div>
+            <div class="list-box">
+                სახელი
+            </div>
+            <div class="list-box">
+                გვარი
+            </div>
+            <div class="list-box">
+                პირადი ნომერი
+            </div>
+            <div class="list-box">
+                დეტალურად
+            </div>
+            <div class="list-box">
+                წაშლა
+            </div>
+        </div>
+        <div class="client" *ngFor="let client of clients">
+            <div class="list-box edit">
+                <fa-icon [icon]="faPenToSquare"></fa-icon>
+            </div>
+            <div class="list-box">
+                {{ client.name }}
+            </div>
+            <div class="list-box">
+                {{ client.surname }}
+            </div>
+            <div class="list-box">
+                {{ client.person_id }}
+            </div>
+            <div class="list-box">
+                დეტალურად
+            </div>
+            <div class="list-box">
+                <fa-icon [icon]="faTrashCan"></fa-icon>
+            </div>
+        </div>
+    </div>
 </div>
+
+

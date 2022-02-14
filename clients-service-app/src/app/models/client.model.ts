@@ -7,4 +7,5 @@ export interface Client {
     mobile: number,
     legal_address: {country: string, city: string, address: string},
     actual_address: {country: string, city: string, address: string},
+    encryption_key: string
 }
