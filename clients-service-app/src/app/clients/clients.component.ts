@@ -15,6 +15,7 @@ export class ClientsComponent implements OnInit {
   faPlusCircle = faPlusCircle;
   faPenToSquare = faPenToSquare;
   faTrashCan = faTrashCan;
+  error = null;
 
   clients: Client[] = [];
 
@@ -28,14 +29,30 @@ export class ClientsComponent implements OnInit {
     this.route.navigate(['new-client'], );
   }
 
+  onDeleteClient(index: number){
+    this.clients.splice(index,1)
+    this.clientService.postClientsData(this.clients)
+    .subscribe(
+      postData=> {
+
+      },
+      error => {
+        
+      }
+    )
+  }
+
   onFetchClientsData(){
     this.clientService.fetchClientsData()
     .subscribe(
-      data => {
+      (data) => {
         this.clients = data;
-        console.log(this.clients)
+      },
+      (error) => {
+        this.error = error.message
       }
-    );
+    )
+   
   }
 
 }

@@ -13,6 +13,8 @@ export class NewClientComponent implements OnInit {
   clients: Client[] = [];
   client!: FormGroup;
   clicked = false;
+  clientIsUniq = true;
+
   postClient = false;
 
   constructor(private clientService: ClientService) { }
@@ -47,7 +49,9 @@ export class NewClientComponent implements OnInit {
         ...this.client.value,
         id: this.clients.length + 1
       }
-      this.clientService.addClient(newClient).subscribe(
+    this.clients.push(newClient);
+    console.log(this.clients);  
+     this.clientService.postClientsData(this.clients).subscribe(
         request => {
           this.postClient = true;
           setTimeout( ()=>{
@@ -76,7 +80,14 @@ export class NewClientComponent implements OnInit {
   }
 
   checkPersonIdValidity(control: FormControl): {[k: string]: boolean} | null {
-    if((/^[0-9]{11}$/).test(control.value)){
+    this.clientIsUniq = true;
+    const combination = (/^[0-9]{11}$/).test(control.value);
+    const findSameId = this.clients.find( client => client.person_id == control.value);
+    if(findSameId){ 
+      console.log(findSameId);
+      this.clientIsUniq = false;
+    }
+    if(combination && !findSameId){
       return null;
     }
     return { 'checkPersonIdValidity': true}

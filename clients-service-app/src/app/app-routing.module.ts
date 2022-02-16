@@ -6,6 +6,7 @@ import { HelpComponent } from "./help/help.component";
 import { HomeComponent } from "./home/home.component";
 
 const appRoutes: Routes = [
+    {path: '', pathMatch: 'prefix', redirectTo: 'home'},
     {path: 'home', component: HomeComponent},
     {path: 'clients', component: ClientsComponent},
     {path: 'new-client', component: NewClientComponent},

@@ -1,16 +1,22 @@
+
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { map } from "rxjs/operators";
 import { Client } from "../models/client.model";
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ClientService{
+    clients!: Client[];
+
     constructor(private http: HttpClient){}
 
-    addClient(client: Client){
-        return this.http.post('https://clients-service-app-default-rtdb.firebaseio.com/clients.json', client);
+    
+
+    postClientsData(clients: Client[]){
+        return this.http.put('https://clients-service-app-default-rtdb.firebaseio.com/clients.json', clients);
     }
 
     fetchClientsData(){
@@ -18,9 +24,8 @@ export class ClientService{
         .pipe(map( request => {
             const clientArray = [];
             const values = Object.values(request);
-            const keys = Object.keys(request);
             for(let i = 0; i < values.length; i++){
-                clientArray.push({...values[i], encryption_key: keys[i]});
+                clientArray.push({...values[i]});
             };
             return clientArray;
         }))

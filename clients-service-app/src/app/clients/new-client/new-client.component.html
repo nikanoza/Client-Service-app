@@ -21,8 +21,11 @@
             <div class="form-group">
                 <label for="person_id">*პირადი ნომერი: </label>
                 <input type="text" id="person_id" formControlName="person_id">
-                <span *ngIf="!client.get('person_id')?.valid && client.get('person_id')?.touched" class="help-message">
+                <span *ngIf="!client.get('person_id')?.valid && client.get('person_id')?.touched && clientIsUniq" class="help-message">
                     პირადი ნომერი უნდა იყოს 11 ნიშნა ციფრი
+                </span>
+                <span *ngIf="!client.get('person_id')?.valid && client.get('person_id')?.touched && !clientIsUniq" class="help-message">
+                    აღნიშნული პირადი ნომერი უკვე არის დარეგისტრირებული
                 </span>
             </div>
             <div class="form-group">

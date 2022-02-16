@@ -11,7 +11,7 @@
             <input type="text">
         </div>
     </div>
-    <div class="client-list">
+    <div class="client-list" *ngIf="!error">
         <div class="list-header">
             <div class="list-box edit">
                 რედაქტირება
@@ -32,7 +32,7 @@
                 წაშლა
             </div>
         </div>
-        <div class="client" *ngFor="let client of clients">
+        <div class="client" *ngFor="let client of clients; let i = index">
             <div class="list-box edit">
                 <fa-icon [icon]="faPenToSquare"></fa-icon>
             </div>
@@ -45,13 +45,17 @@
             <div class="list-box">
                 {{ client.person_id }}
             </div>
-            <div class="list-box">
+            <div class="list-box details">
                 დეტალურად
             </div>
-            <div class="list-box">
+            <div class="list-box delete" (click)="onDeleteClient(i)">
                 <fa-icon [icon]="faTrashCan"></fa-icon>
             </div>
         </div>
+    </div>
+    <div class="error" *ngIf="error">
+        <h1>An Error Occured</h1>
+        <p> {{ error }} </p>
     </div>
 </div>
 
