@@ -5,7 +5,6 @@ export interface Client {
     gender: string,
     person_id: string,
     mobile: number,
-    legal_address: {country: string, city: string, address: string},
-    actual_address: {country: string, city: string, address: string},
-    encryption_key: string
+    legal_address: {legal_country: string, legal_city: string, legal_address: string},
+    actual_address: {actual_country: string, actual_city: string, actual_address: string},
 }

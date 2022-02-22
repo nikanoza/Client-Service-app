@@ -11,6 +11,8 @@ import { MenuComponent } from './menu/menu.component';
 import { ClientsComponent } from './clients/clients.component';
 import { HelpComponent } from './help/help.component';
 import { NewClientComponent } from './clients/new-client/new-client.component';
+import { ErrorComponent } from './error/error.component';
+import { ClientComponent } from './clients/client/client.component';
 
 
 const firebaseConfig = {
@@ -31,7 +33,9 @@ const firebaseConfig = {
     MenuComponent,
     ClientsComponent,
     HelpComponent,
-    NewClientComponent
+    NewClientComponent,
+    ErrorComponent,
+    ClientComponent
   ],
   imports: [
     BrowserModule,

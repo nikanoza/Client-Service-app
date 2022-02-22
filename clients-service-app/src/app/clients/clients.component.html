@@ -7,10 +7,48 @@
             </div>
         </button>
         <h2>კლიენტთა ცნობარი</h2>
-        <div class="search">
-            <input type="text">
+        <div class="search" title="პირადი ნომრით ძიება">
+            <input type="text" (change)="getSearchPersonId($event)">
+            <div class="icon" (click)="onSearchByPersonId()">
+                <fa-icon [icon]="faMagnifyingGlass"></fa-icon>
+            </div>
         </div>
     </div>
+
+    <div class="filter-menu">
+        <form [formGroup]="filterForm" (ngSubmit)="onFilterClients()">
+            <div class="input-group">
+                <label for="name">სახელი: </label>
+                <input type="text" id="name" formControlName="name">
+            </div>
+            <div class="input-group">
+                <label for="surname">გვარი: </label>
+                <input type="text" id="surname" formControlName="surname">
+            </div>
+            <div class="input-group">
+                <label for="country">ქვეყანა: </label>
+                <input type="text" id="country" formControlName="country">
+            </div>
+            <div class="input-group">
+                <label for="city">ქალაქი: </label>
+                <input type="text" id="city" formControlName="city">
+            </div>
+            <div class="icon" title="ქვეყნის,ქალაქის მონაცემები იფილტრება ფაქტიური მისამართით">
+                <fa-icon [icon]="faExclamation"></fa-icon>
+            </div>
+            <button type="submit" class="filter-box">
+                ფილტრი
+            </button>
+        </form>
+
+        <select name="sortValues" id="sortValues" class="sortation" (change)="changeSort($event)">
+            <option value="namesUp">სახელით: ა-ჰA-Z</option>
+            <option value="namesDown">სახელით: ჰ-აZ-A</option>
+            <option value="surnamesUp">გვარით: ა-ჰA-Z</option>
+            <option value="surnamesDown">გვარით: ჰ-აZ-A</option>
+        </select>
+    </div>
+    
     <div class="client-list" *ngIf="!error">
         <div class="list-header">
             <div class="list-box edit">
@@ -33,7 +71,7 @@
             </div>
         </div>
         <div class="client" *ngFor="let client of clients; let i = index">
-            <div class="list-box edit">
+            <div class="list-box edit" (click)="onEditClient(i)">
                 <fa-icon [icon]="faPenToSquare"></fa-icon>
             </div>
             <div class="list-box">
@@ -45,7 +83,7 @@
             <div class="list-box">
                 {{ client.person_id }}
             </div>
-            <div class="list-box details">
+            <div class="list-box details" (click)="onSingleClientPage(i)">
                 დეტალურად
             </div>
             <div class="list-box delete" (click)="onDeleteClient(i)">

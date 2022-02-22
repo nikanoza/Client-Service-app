@@ -9,11 +9,9 @@ import { Observable } from 'rxjs';
     providedIn: 'root'
 })
 export class ClientService{
-    clients!: Client[];
-
     constructor(private http: HttpClient){}
 
-    
+    clients: Client[] = [];
 
     postClientsData(clients: Client[]){
         return this.http.put('https://clients-service-app-default-rtdb.firebaseio.com/clients.json', clients);
@@ -29,5 +27,24 @@ export class ClientService{
             };
             return clientArray;
         }))
+    }
+
+    updateClients(array: Client[]){
+        this.clients = array;
+    }
+
+    updateClient(client:Client){
+        const index = this.clients.findIndex( obj => obj.id === client.id);
+        this.clients[index] = client;
+        console.log(this.clients);
+    };
+
+    deleteClient(client:Client){
+        const index = this.clients.findIndex( obj => obj.id === client.id);
+        this.clients.splice(index,1);
+    }
+
+    getClient(id:number){
+        return this.clients.find( client => client.id === id);
     }
 }

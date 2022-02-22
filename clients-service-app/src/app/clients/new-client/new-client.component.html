@@ -1,5 +1,5 @@
 <div class="new-client-page">
-    <form [formGroup]="client" (ngSubmit)="onAddClient()">
+    <form [formGroup]="client" (ngSubmit)="onSubmitForm()">
         <div class="form-groups">
             <div class="form-group">
                 <label for="name">*სახელი: </label>
@@ -22,7 +22,7 @@
                 <label for="person_id">*პირადი ნომერი: </label>
                 <input type="text" id="person_id" formControlName="person_id">
                 <span *ngIf="!client.get('person_id')?.valid && client.get('person_id')?.touched && clientIsUniq" class="help-message">
-                    პირადი ნომერი უნდა იყოს 11 ნიშნა ციფრი
+                    პირადი ნომერი უნდა იყოს 11 ნიშნა რიცხვი
                 </span>
                 <span *ngIf="!client.get('person_id')?.valid && client.get('person_id')?.touched && !clientIsUniq" class="help-message">
                     აღნიშნული პირადი ნომერი უკვე არის დარეგისტრირებული
@@ -100,7 +100,7 @@
                 <label for="male">კაცი</label>
             </div>
         </div>
-        <button class="btn" type="submit">კლიენტის დამატება</button>
+        <button class="btn" type="submit">{{ buttonText }}</button>
         <span *ngIf="!client.valid && client.touched && clicked" class="help-message">
             მონაცემები არ არის სწორად შევსებული
         </span>

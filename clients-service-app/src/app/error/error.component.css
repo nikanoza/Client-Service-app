@@ -1,0 +1,14 @@
+div{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+
+h3{
+    padding: 50px;
+    background: rgb(247, 156, 156);
+    color: red;
+    font-size: 2em;
+}
