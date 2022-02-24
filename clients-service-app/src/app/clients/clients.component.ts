@@ -161,13 +161,11 @@ export class ClientsComponent implements OnInit, OnDestroy {
     };  
   }
 
-  onEditClient(index: number){ // კლიენტის რედაქტირების გვერდზე გადასვლა
-    const clientId = this.clients[index].id;
+  onEditClient(clientId: number){ // კლიენტის რედაქტირების გვერდზე გადასვლა
     this.route.navigate(['client', clientId, 'edit']);
   }
 
-  onSingleClientPage(index: number){ // კლიენტის ნახვა
-    const clientId = this.clients[index].id;
+  onSingleClientPage(clientId : number){ // კლიენტის ნახვა
     this.route.navigate(['client', clientId]);
   };
 

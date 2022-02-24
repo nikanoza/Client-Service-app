@@ -89,6 +89,7 @@ export class NewClientComponent implements OnInit, CanComponentDeactivate {
 
         this.clientService.updateClient(newClient);
         const newClients = this.clientService.clients;
+        console.log(newClients);
         this.clientService.postClientsData(newClients).subscribe(
           request => {
             this.clientSaved = true;

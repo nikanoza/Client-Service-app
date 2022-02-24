@@ -78,7 +78,7 @@
 
         <!-- კლიენტთა მონაცემის გამოტანა -->
         <div class="client" *ngFor="let client of clients; let i = index" [@clientState]>
-            <div class="list-box edit" (click)="onEditClient(i)">
+            <div class="list-box edit" (click)="onEditClient(client.id)">
                 <fa-icon [icon]="faPenToSquare"></fa-icon>
             </div>
             <div class="list-box name">
@@ -90,7 +90,7 @@
             <div class="list-box">
                 {{ client.person_id }}
             </div>
-            <div class="list-box details" (click)="onSingleClientPage(i)">
+            <div class="list-box details" (click)="onSingleClientPage(client.id)">
                 დეტალურად
             </div>
             <div class="list-box delete" (click)="onDeleteClient(i)">
