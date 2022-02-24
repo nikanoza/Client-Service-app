@@ -15,20 +15,22 @@ import { ClientService } from 'src/app/services/client.service';
 export class NewClientComponent implements OnInit, CanComponentDeactivate {
 
   clients: Client[] = [];
-  client!: FormGroup;
-  clicked = false;
-  clientIsUniq = true;
-  clientSaved = true;
-  editClient = false;
-  editClientId = 0;
-  postClient = false;
-  buttonText = 'კლიენტის დამატება';
+  client!: FormGroup; // შესავსები ფორმა
+  clicked = false; // დააჭირა თუ არა საბმითის ღილაკს იუზერმა
+  clientIsUniq = true; // კლიენტის პირადი ნომერი არის თუ არა უნიკალური
+  clientSaved = true; // მოხდა თუ არა ოპერაციის შესრულება 
+  editClient = false; // რედაქტირების გვერდია თი ახალი კლიენტის შექმნის
+  editClientId = 0; // სარედქტირო კლიენტის აიდი
+  postClient = false; // მონაცემების გადაგზავნა(შეტყობინების გამოსატანად)
+  buttonText = 'კლიენტის დამატება'; // ღილაკის ტექსტი, რედაქტირების ფეიჯი თუა იცვლება
+  error = null; //ერორის მესიჯი
+  
 
   constructor(private clientService: ClientService,
               private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.onFetchClientsdata();
+    this.onFetchClientsdata(); 
 
     this.client = new FormGroup({
       'name': new FormControl(null, [Validators.required, this.checkNameValidity.bind(this)]),
@@ -47,15 +49,15 @@ export class NewClientComponent implements OnInit, CanComponentDeactivate {
       }),
       'gender': new FormControl("female", Validators.required)
     });
-    this.getEditRoute();
-    this.enterValuesForEdit();
-    this.changesStatus();
+    this.getEditRoute(); // სტატიკურად გადმოცემული ინფორმაცია ვიმყოფებით თუ არა რედაქტირების გვერდზე
+    this.enterValuesForEdit(); // თუ რედაქტირების გვერდია resolver-იდან მიღებული ინფორმაციით ველების შევსება
+    this.changesStatus(); //რომელიმე ველის ინფორმაციის ცვლილება, canDeactivate გასააქტიურებლად
   }
 
-  onSubmitForm(){
+  onSubmitForm(){ // ფორმის გადაგზავნა
     this.clicked = true;
     this.postClient = false;
-    if(!this.editClient){
+    if(!this.editClient){ // თუ ახალი კლიენტი იქმნება
       if(this.client.valid){
         const newClient = {
           ...this.client.value,
@@ -69,13 +71,16 @@ export class NewClientComponent implements OnInit, CanComponentDeactivate {
             this.client.get('gender')?.setValue("female");
             this.postClient = true;
             this.clientSaved = true;
-            setTimeout( ()=>{
+            setTimeout( ()=>{ // ამ ცვლადს გამოაქვს შეტყობინება წარმატებით გადაგზავნის შემთხვევაში 3 წმ-ით
               this.postClient = false;
             }, 3000);
+          },
+          (error) => {
+            this.error = error.message;
           }
         );
       };
-    }else{
+    }else{ // თუ უკვე არსებული კლიენტის რედაქტირებას ვახდენთ
       if(this.client.valid){
         const newClient = {
           ...this.client.value,
@@ -86,14 +91,13 @@ export class NewClientComponent implements OnInit, CanComponentDeactivate {
         const newClients = this.clientService.clients;
         this.clientService.postClientsData(newClients).subscribe(
           request => {
-            this.postClient = true;
             this.clientSaved = true;
             setTimeout( ()=>{
               this.postClient = false;
             }, 3000);
           },
           (error) => {
-
+            this.error = error.message;
           }
         );
       }  
@@ -110,7 +114,8 @@ export class NewClientComponent implements OnInit, CanComponentDeactivate {
     );
   }
 
-  checkNameValidity(control: FormControl): {[k: string]: boolean} | null {
+  //ფორმის name ველის ვალიდაციის შემოწმება, იგივეა surname შემთხვევაშიც
+  checkNameValidity(control: FormControl): {[k: string]: boolean} | null { 
     const eng = (/^[a-zA-z]{2,50}$/).test(control.value);
     const geo = (/^[ა-ჰ]{2,50}$/).test(control.value)
     if(eng || geo){
@@ -119,6 +124,7 @@ export class NewClientComponent implements OnInit, CanComponentDeactivate {
     return {'chackNameValidity': true}
   }
 
+  //პირადი ნომრის ვალიდაცია
   checkPersonIdValidity(control: FormControl): {[k: string]: boolean} | null {
     this.clientIsUniq = true;
     const combination = (/^[0-9]{11}$/).test(control.value);
@@ -132,6 +138,7 @@ export class NewClientComponent implements OnInit, CanComponentDeactivate {
     return { 'checkPersonIdValidity': true}
   }
 
+  //ტელეფონის ნომრის ვალიდაცია
   checkMobileValidity(control: FormControl): {[k: string]: boolean} | null {
     if(control.value > 5 * 10**8 - 1 && control.value < 6*10**8){
       return null;
@@ -139,6 +146,7 @@ export class NewClientComponent implements OnInit, CanComponentDeactivate {
     return {'checkMobileValidity': true};
   }
 
+  //მონაცემების ცვლილება canDeactivate გასააქტიურებლათ თუ შეცდომით გვერდის დატოვებას ცდილობს იუზერი
   changesStatus(){
     this.client.valueChanges.subscribe(
       value => {

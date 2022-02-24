@@ -32,3 +32,11 @@
     background: rgb(242,231,71);
     color: #333333;
 }
+
+@media (max-width: 800px){
+    .navigation{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}

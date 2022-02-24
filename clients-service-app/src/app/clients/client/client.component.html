@@ -1,3 +1,95 @@
-<div class="singla-page">
-    
+<div class="singla-page" *ngIf="getClientData && !error">
+    <div class="client-box">
+        <p>სახელი: {{ client.name }}</p>
+        <p>გვარი: {{ client.surname }}</p>
+        <p>სქესი: {{ client.gender == 'male'? 'მამრობითი' : 'მდედრობითი'}}</p>
+        <p>მობილური: {{ client.mobile }}</p>
+        <p><strong>იურიდიული მისამართი:</strong></p>
+        <div class="address-box">
+            <p><strong>ქვეყანა</strong>: {{ client.legal_address.legal_country }}</p>
+            <p><strong>ქალაქი</strong>: {{ client.legal_address.legal_city }}</p>
+            <p><strong>მისამართი</strong>: {{ client.legal_address.legal_address }}</p>
+        </div>
+        <p><strong>ფაქტიური მისამართი:</strong></p>
+        <div class="address-box">
+            <p><strong>ქვეყანა</strong>: {{ client.actual_address.actual_country }}</p>
+            <p><strong>ქალაქი</strong>: {{ client.actual_address.actual_city }}</p>
+            <p><strong>მისამართი</strong>: {{ client.actual_address.actual_address }}</p>
+        </div>
+    </div>
+
+    <div class="acounts-section">
+        <div class="acounts">
+            <div class="acounts-header">
+                <div class="acount-box">
+                    ანგარიშის ნომერი
+                </div>
+                <div class="acount-box">
+                    ანგარიშის ტიპი
+                </div>
+                <div class="acount-box">
+                    ვალუტა
+                </div>
+                <div class="acount-box">
+                    ანგარიშის სტატუსი
+                </div>
+                <div class="acount-box">
+                    ანგარიშის დახურვა
+                </div>
+            </div>
+            <div class="client-account" *ngFor="let account of client_accounts; let i = index" [@itemIn]>
+                <div class="acount-box">
+                    {{ account.account_id }}
+                </div>
+                <div class="acount-box">
+                    {{ account.type == "mimdinare"? 'მიმდინარე': account.type == "dagrovebiti"? 'დაგროვებითი' : 'შემნახველი' }}
+                </div>
+                <div class="acount-box">
+                    {{ account.currency }}
+                </div>
+                <div class="acount-box">
+                    {{ account.status == 'active'? 'აქტიური' : 'დახურული' }}
+                </div>
+                <div class="acount-box close" (click)="onCloseAccount(account)">
+                    {{ account.status == 'active'? 'დახურვა' : '' }}
+                </div>
+            </div>
+        </div>
+        <div class="add-acount">
+            <form [formGroup]="account" (ngSubmit)="onAddAccount()">
+                <div class="input-box">
+                    <p>ანგარიშის ტიპი:</p>
+                    <label for="mimdinare">მიმდინარე</label>
+                    <input type="radio" formControlName="type" id="mimdinare" value="mimdinare" name="type">
+                    <label for="shemnaxveli">შემნახველი</label>
+                    <input type="radio" formControlName="type" id="shemnaxveli" value="shemnaxveli" name="type">
+                    <label for="dagrovebiti">დაგროვებითი</label>
+                    <input type="radio" formControlName="type" id="dagrovebiti" value="dagrovebiti" name="type">
+                </div>
+                <div class="input-box">
+                    <p>ვალუტა:</p>
+                    <select name="currency" id="currency" formControlName="currency">
+                        <option value="GEL">GEL</option>
+                        <option value="USD">USD</option>
+                        <option value="EUR">EUR</option>
+                        <option value="RUB">RUB</option>
+                    </select>
+                </div>
+                <div class="input-box">
+                    <p>ანგარიშის სტატუსი:</p>
+                    <label for="active">აქტიური</label>
+                    <input type="radio" id="active" formControlName="status" value="active" name="status">
+                    <label for="passive">დახურული</label>
+                    <input type="radio" id="passive" formControlName="status" value="passive" name="status">
+                </div>
+                <button type="submit" class="btn-add-acount">ანგარიშის დამატება</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- ერორის ფანჯარა რაიმე შეცდომის შემთხვევაში -->
+<div class="error" *ngIf="error">
+    <h1>An Error Occured</h1>
+    <p> {{ error }} </p>
 </div>

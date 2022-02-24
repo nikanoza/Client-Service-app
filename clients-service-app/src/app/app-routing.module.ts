@@ -7,11 +7,9 @@ import { ErrorComponent } from "./error/error.component";
 import { CanDeactivateGuard } from "./guards/can-deactivate-guard.service";
 import { ClientsResolver } from "./guards/clients-resolver.service";
 import { HelpComponent } from "./help/help.component";
-import { HomeComponent } from "./home/home.component";
 
 const appRoutes: Routes = [
-    {path: '', pathMatch: 'prefix', redirectTo: 'home'},
-    {path: 'home', component: HomeComponent},
+    {path: '', pathMatch: 'prefix', redirectTo: 'clients'},
     {path: 'clients', component: ClientsComponent},
     {path: 'client/:id', component: ClientComponent, resolve: {client: ClientsResolver}},
     {path: 'new-client', component: NewClientComponent, canDeactivate: [CanDeactivateGuard], data: {edit: false}},

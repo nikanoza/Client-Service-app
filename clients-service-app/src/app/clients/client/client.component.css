@@ -5,4 +5,146 @@
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
+    row-gap: 60px;
+}
+
+.client-box{
+    width: 50%;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    row-gap: 15px;
+}
+
+.address-box{
+    display: flex;
+    column-gap: 10px;
+    margin-left: 30px;
+}
+
+.acounts-section{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 100px;
+}
+
+.acounts{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    row-gap: 5px;
+    max-height: 250px;
+    overflow-y: auto;
+}
+.acounts-header{
+    background: #333333;
+    color: rgb(242,231,71);
+}
+
+.acounts-header, .client-account{
+    display: flex;
+    column-gap: 5px;
+}
+
+.client-account .acount-box{
+    border: 1px solid #333;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.acounts-header div, .client-account div{
+    width: 180px;
+    text-align: center;
+}
+
+.acount-box{
+    padding: 5px;
+}
+
+.add-acount{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    background: lightblue;
+    border-radius: 5px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.input-box{
+    margin-bottom: 10px;
+    display: flex;
+}
+
+.input-box label, .input-box select{
+    margin-left: 10px;
+}
+
+.btn-add-acount{
+    width: 50%;
+    margin-left: 25%;
+    outline: none;
+    border: none;
+    background: green;
+    color: #fff;
+    height: 30px;
+    font-size: 1.1em;
+}
+
+.close{
+    cursor: pointer;
+}
+
+.error{
+    margin-top: 20px;
+    color: red;
+    background: rgb(248, 165, 165);
+    padding: 20px 30px;
+}
+
+@media (max-width: 1600px){
+    .acounts-section{
+        flex-direction: column;
+        row-gap: 30px;
+    }
+}
+
+@media (max-width: 1200px){
+    .client-box{
+        width: 80%;
+    }
+
+    .acounts-header div, .client-account div{
+        width: 100px;
+        font-size: 0.8em;
+    }
+}
+
+@media (max-width: 700px){
+    .client-box{
+        font-size: 0.8em;
+    }
+
+    .add-acount{
+        font-size: 0.8em;
+    }
+}
+
+@media (max-width: 600px){
+    .acounts-header div, .client-account div{
+        width: 70px;
+        font-size: 0.5em;
+    }
+
+    .client-box{
+        width: 90%;
+        font-size: 0.5em;
+    }
 }

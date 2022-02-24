@@ -1,4 +1,5 @@
 <div class="clients-page">
+    <!-- სათაურის ზოლი -->
     <div class="clients-header">
         <button class="button" (click)="onCreatClient()">
             კლიენტის დამატება
@@ -15,6 +16,7 @@
         </div>
     </div>
 
+    <!-- ფილტრაციის მენიუ -->
     <div class="filter-menu">
         <form [formGroup]="filterForm" (ngSubmit)="onFilterClients()">
             <div class="input-group">
@@ -33,15 +35,16 @@
                 <label for="city">ქალაქი: </label>
                 <input type="text" id="city" formControlName="city">
             </div>
-            <div class="icon" title="ქვეყნის,ქალაქის მონაცემები იფილტრება ფაქტიური მისამართით">
-                <fa-icon [icon]="faExclamation"></fa-icon>
-            </div>
             <button type="submit" class="filter-box">
                 ფილტრი
             </button>
+            <div class="icon" title="ქვეყნის,ქალაქის მონაცემები იფილტრება ფაქტიური მისამართით">
+                <fa-icon [icon]="faExclamation"></fa-icon>
+            </div>
         </form>
 
-        <select name="sortValues" id="sortValues" class="sortation" (change)="changeSort($event)">
+        <!-- სორტირებისთვის -->
+        <select name="sortValues" id="sortValues" class="sortation"  [value]="sortValue" (change)="changeSort($event)">
             <option value="namesUp">სახელით: ა-ჰA-Z</option>
             <option value="namesDown">სახელით: ჰ-აZ-A</option>
             <option value="surnamesUp">გვარით: ა-ჰA-Z</option>
@@ -49,7 +52,9 @@
         </select>
     </div>
     
+    <!-- კლიენტთა სია -->
     <div class="client-list" *ngIf="!error">
+        <!-- სიის სვეტების სათაურები -->
         <div class="list-header">
             <div class="list-box edit">
                 რედაქტირება
@@ -70,11 +75,13 @@
                 წაშლა
             </div>
         </div>
-        <div class="client" *ngFor="let client of clients; let i = index">
+
+        <!-- კლიენტთა მონაცემის გამოტანა -->
+        <div class="client" *ngFor="let client of clients; let i = index" [@clientState]>
             <div class="list-box edit" (click)="onEditClient(i)">
                 <fa-icon [icon]="faPenToSquare"></fa-icon>
             </div>
-            <div class="list-box">
+            <div class="list-box name">
                 {{ client.name }}
             </div>
             <div class="list-box">
@@ -91,6 +98,8 @@
             </div>
         </div>
     </div>
+
+    <!-- ერორის ფანჯარა რაიმე შეცდომის შემთხვევაში -->
     <div class="error" *ngIf="error">
         <h1>An Error Occured</h1>
         <p> {{ error }} </p>

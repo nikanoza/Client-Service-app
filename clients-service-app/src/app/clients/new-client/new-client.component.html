@@ -1,4 +1,4 @@
-<div class="new-client-page">
+<div class="new-client-page" *ngIf="!error">
     <form [formGroup]="client" (ngSubmit)="onSubmitForm()">
         <div class="form-groups">
             <div class="form-group">
@@ -106,4 +106,10 @@
         </span>
         <span class="help-message done" *ngIf="postClient">ოპერაცია წარმატებით დასრულდა</span>
     </form>
+</div>
+
+<!-- ერორის ფანჯარა რაიმე შეცდომის შემთხვევაში -->
+<div class="error" *ngIf="error">
+    <h1>An Error Occured</h1>
+    <p> {{ error }} </p>
 </div>

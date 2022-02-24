@@ -3,7 +3,6 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { map } from "rxjs/operators";
 import { Client } from "../models/client.model";
-import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -33,18 +32,18 @@ export class ClientService{
         this.clients = array;
     }
 
-    updateClient(client:Client){
+    updateClient(client:Client){ //კლიენტის მონაცემების განახლება რედაქტირების შემთხვევაში
         const index = this.clients.findIndex( obj => obj.id === client.id);
         this.clients[index] = client;
         console.log(this.clients);
     };
 
-    deleteClient(client:Client){
+    deleteClient(client:Client){ // კლიენტის წაშლა
         const index = this.clients.findIndex( obj => obj.id === client.id);
         this.clients.splice(index,1);
     }
 
-    getClient(id:number){
+    getClient(id:number){ // კლიენტის პოვნა პერსონალურ გვერდზე გადასვლისთვის
         return this.clients.find( client => client.id === id);
     }
 }

@@ -187,3 +187,98 @@ fa-icon{
     outline: none;
     height: 30px;
 }
+
+@media (max-width: 1780px){
+    .filter-menu{
+        width: 60%;
+        flex-direction: column;
+    }
+    .filter-menu form{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+    }
+
+    .filter-box{
+        margin-left: 150px;
+        width: 200px;
+    }
+    .sortation{
+        margin-top: 10px;
+        margin-left: 0;
+    }
+
+    .client-list{
+        max-height: 450px;
+    }
+}
+
+@media (max-width: 1366px){
+    .clients-header, .clients-header button{
+        font-size: 0.9rem;
+    }
+    .list-box{
+        width: 150px;
+        font-size: 0.9em;
+        padding: 4px 8px;
+    }
+}
+
+@media (max-width: 1100px){
+    .clients-header, .clients-header button{
+        font-size: 0.7rem;
+    }
+    .clients-header button{
+       padding: 3px;
+       text-align: center;
+    }
+    .filter-menu{
+        width: 90%;
+        column-gap: 5px;
+    }
+
+    .list-box{
+        width: 100px;
+        font-size: 0.7em;
+        padding: 2px 4px;
+    }
+}
+
+@media (max-width: 750px){
+    .filter-menu form{
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(1fr);
+    }
+    .filter-box{
+        margin-left: 30px;
+    }
+
+    .filter-menu .icon{
+        margin-top: -20px;
+    }
+
+    .list-header{
+        display: none;
+    }
+
+    .client{
+        flex-direction: column;
+    }
+
+    .list-box{
+        width: 250px;
+        font-size: 1em;
+        padding: 10px 20px;
+    }
+
+    .edit{
+        background: rgb(242,231,71);
+    }
+
+    .clients-header{
+        flex-direction: column;
+        row-gap: 20px;
+    }
+
+    
+}

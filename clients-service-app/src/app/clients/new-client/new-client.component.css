@@ -86,3 +86,22 @@ input[type='radio']{
 .done{
     font-size: 1em;
 }
+
+.error{
+    margin-top: 20px;
+    color: red;
+    background: rgb(248, 165, 165);
+    padding: 20px 30px;
+}
+
+@media (max-width: 1500px){
+    form{
+        width: 80%;
+    }    
+}
+
+@media (max-width: 600px){
+    label{
+        font-size: 0.8em;
+    }
+}
