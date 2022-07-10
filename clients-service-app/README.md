@@ -1,5 +1,3 @@
-![This is header image](/src/assets/coronatime.png)
-
 ## Clients-Service-App
 
 Clients-Service-App is app, which manage users info.
