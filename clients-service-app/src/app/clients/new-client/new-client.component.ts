@@ -61,14 +61,14 @@ export class NewClientComponent implements OnInit, CanComponentDeactivate {
       if(this.client.valid){
         const newClient = {
           ...this.client.value,
-          id: this.clients.length + 1
+          id: Math.random()
         }
       this.clients.push(newClient);
        this.clientService.postClientsData(this.clients).subscribe(
           request => {
             this.client.reset();
             this.client.get('mobile')?.setValue(5);
-            this.client.get('gender')?.setValue("female");
+            this.client.get('gender')?.setValue("female");this.clients.length + 1
             this.postClient = true;
             this.clientSaved = true;
             setTimeout( ()=>{ // ამ ცვლადს გამოაქვს შეტყობინება წარმატებით გადაგზავნის შემთხვევაში 3 წმ-ით
